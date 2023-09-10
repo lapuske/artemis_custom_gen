@@ -52,7 +52,7 @@ targets:
       artemis:
         options:
           scalar_mapping:
-            - graphql_type: MyCustomType
+            - graphql_type: MyGraphQlScalar
               custom_parser_import: "package:your_package/path_to_your_model/my_custom_type.dart"
               dart_type:
                 name: MyCustomType
