@@ -103,10 +103,10 @@ class ArtemisCustomTypeBuilder implements Builder {
         'List<$dartType?> fromGraphQLList${graphQlType}NullableToDartList${dartType}Nullable(List<Object?> v) => v.map((e) => fromGraphQL${graphQlType}NullableToDart${dartType}Nullable(e as String?)).toList();\n'
         'List<String?> fromDartList${dartType}NullableToGraphQLList${graphQlType}Nullable(List<$dartType?> v) => v.map((e) => fromDart${dartType}NullableToGraphQL${graphQlType}Nullable(e)).toList();\n'
         'List<$dartType?>? fromGraphQLListNullable${graphQlType}NullableToDartListNullable${dartType}Nullable(List<Object?>? v) => v?.map((e) => fromGraphQL${graphQlType}NullableToDart${dartType}Nullable(e as String?)).toList();\n'
-        'List<String?>? fromDartListNullable${dartType}NullableToGraphQLListNullable${graphQlType}Nullable(List<$dartType?>? v) => v?.map((e) => fromDart${dartType}NullableToGraphQL${graphQlType}Nullable(e)).toList();\n\n',
+        'List<String?>? fromDartListNullable${dartType}NullableToGraphQLListNullable${graphQlType}Nullable(List<$dartType?>? v) => v?.map((e) => fromDart${dartType}NullableToGraphQL${graphQlType}Nullable(e)).toList();\n',
       );
 
-      buffer.write(
+      buffer.writeln(
         DartFormatter(fixes: [StyleFix.singleCascadeStatements]).format(
           code.toString(),
         ),
