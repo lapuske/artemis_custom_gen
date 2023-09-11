@@ -46,8 +46,6 @@ class ArtemisCustomTypeBuilder implements Builder {
       }
     }
 
-    print('IMPORTS: ${imports.join('\n')}');
-
     if (items.isEmpty) {
       // Nothing to generate.
       return;
@@ -62,8 +60,6 @@ class ArtemisCustomTypeBuilder implements Builder {
     buffer.writeln();
 
     for (var e in items) {
-      print('Generating for ${e.element.name}');
-
       final List<ConstructorElement> ctors =
           (e.element as ClassElement).constructors;
       final String name = e.element.name!;
@@ -115,6 +111,5 @@ class ArtemisCustomTypeBuilder implements Builder {
 
     final outputId = AssetId(buildStep.inputId.package, 'lib/$output');
     await buildStep.writeAsString(outputId, buffer.toString());
-    print('written to $outputId');
   }
 }

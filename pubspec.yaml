@@ -1,6 +1,6 @@
 name: artemis_custom_gen
 description: Custom types generator for artemis.
-version: 1.0.0
+version: 0.1.0
 repository: https://github.com/lapuske/artemis_custom_gen
 
 environment:
