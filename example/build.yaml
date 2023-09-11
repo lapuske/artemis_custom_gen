@@ -1,0 +1,7 @@
+# Specify the options, if you would like to change the default output.
+targets:
+  $default:
+    builders:
+      artemis_custom_gen:
+        options:
+          output: api/backend/parsers.dart # Default is `api/parsers.dart`

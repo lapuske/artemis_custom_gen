@@ -1,7 +1,5 @@
 import 'package:artemis_custom_gen/artemis_custom_gen.dart';
 
-part 'artemis_custom_gen_example.g.dart';
-
 class NewType<T> {
   const NewType(this.value);
   final T value;

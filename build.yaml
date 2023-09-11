@@ -1,8 +1,11 @@
 builders:
-  collection_builder:
+  artemis_custom_gen:
     import: "package:artemis_custom_gen/src/builder.dart"
     builder_factories: ["artemisCustomTypeBuilder"]
-    build_extensions: {".dart": ["artemis_custom_type.g.part"]}
+    build_extensions: {".dart": [".g.dart"]}
     auto_apply: dependents
-    build_to: cache
+    build_to: source
     applies_builders: ["source_gen|combining_builder"]
+    runs_before:
+      - "artemis"
+      - "json_serializable"

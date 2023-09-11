@@ -1,10 +1,6 @@
-// GENERATED CODE - DO NOT MODIFY BY HAND
+import '/artemis_custom_gen_example.dart';
 
-part of 'artemis_custom_gen_example.dart';
-
-// **************************************************************************
-// ArtemisCustomTypeGenerator
-// **************************************************************************
+// UserId -> UserId
 
 UserId fromGraphQLUserIdToDartUserId(String v) => UserId(v);
 String fromDartUserIdToGraphQLUserId(UserId v) => v.toString();
@@ -43,6 +39,7 @@ List<String?>?
         v
             ?.map((e) => fromDartUserIdNullableToGraphQLUserIdNullable(e))
             .toList();
+// Version -> Cursor
 
 Version fromGraphQLCursorToDartVersion(String v) => Version.parse(v);
 String fromDartVersionToGraphQLCursor(Version v) => v.toString();
@@ -82,6 +79,7 @@ List<String?>?
         v
             ?.map((e) => fromDartVersionNullableToGraphQLCursorNullable(e))
             .toList();
+// GameTitle -> NovelTitle
 
 GameTitle fromGraphQLNovelTitleToDartGameTitle(String v) => GameTitle(v);
 String fromDartGameTitleToGraphQLNovelTitle(GameTitle v) => v.toString();
