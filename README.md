@@ -3,6 +3,10 @@
 
 [`artemis_custom_gen`] is a custom types generator for [`artemis`] GraphQL package.
 
+* [Getting started](#getting-started)
+* [Usage](#usage)
+* [Roadmap](#roadmap)
+
 
 
 
