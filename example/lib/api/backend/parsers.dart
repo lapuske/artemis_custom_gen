@@ -1,4 +1,4 @@
-import '/artemis_custom_gen_example.dart';
+import '/main.dart';
 
 // UserId -> UserId
 

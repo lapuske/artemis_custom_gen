@@ -1,7 +1,7 @@
-`artemis_custom_gen`
+[`artemis_custom_gen`]
 ====================
 
-`artemis_custom_gen` is a custom types generator for `artemis` GraphQL package.
+[`artemis_custom_gen`] is a custom types generator for [`artemis`] GraphQL package.
 
 
 
@@ -104,13 +104,13 @@ targets:
           output: api/backend/parsers.dart # Without `lib/`.
 ```
 
-3. Run the `build_runner`:
+3. Run the [`build_runner`]:
 
 ```bash
 dart run build_runner build
 ```
 
-4. Add the generated type to the `artemis` options in `build.yaml` (see `artemis` documentation to learn more):
+4. Add the generated type to the [`artemis`] options in `build.yaml` (see [`artemis`] documentation to learn more):
 
 ```yaml
 targets:
@@ -133,3 +133,10 @@ targets:
 ## Roadmap
 
 - [ ] Configurable to `String` and from `String` parsers on `ArtemisCustomType`.
+
+
+
+
+[`artemis`]: https://pub.dev/packages/artemis
+[`artemis_custom_gen`]: https://pub.dev/packages/artemis_custom_gen
+[`build_runner`]: https://pub.dev/packages/build_runner
