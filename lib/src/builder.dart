@@ -60,15 +60,31 @@ class ArtemisCustomTypeBuilder implements Builder {
     buffer.writeln();
 
     for (var e in items) {
-      final List<ConstructorElement> ctors =
-          (e.element as ClassElement).constructors;
       final String name = e.element.name!;
 
+      final ExecutableElement? parse =
+          e.annotation.peek('parse')?.objectValue.toFunctionValue();
+      final ExecutableElement? convert =
+          e.annotation.peek('convert')?.objectValue.toFunctionValue();
+
       String? dartCtor;
-      for (var ctor in ctors) {
-        if (ctor.parameters.length == 1 &&
-            ctor.parameters.first.type.isDartCoreString) {
-          dartCtor = ctor.displayName;
+      String? toString = 'toString()';
+
+      if (parse != null) {
+        // final code =
+        //     (await buildStep.resolver.astNodeFor(parse))?.childEntities.last;
+        dartCtor = '${parse.enclosingElement3.name}.${parse.name}(v)';
+      }
+
+      if (dartCtor == null) {
+        final List<ConstructorElement> ctors =
+            (e.element as ClassElement).constructors;
+
+        for (var ctor in ctors) {
+          if (ctor.parameters.length == 1 &&
+              ctor.parameters.first.type.isDartCoreString) {
+            dartCtor = '${ctor.displayName}(v)';
+          }
         }
       }
 
@@ -88,13 +104,13 @@ class ArtemisCustomTypeBuilder implements Builder {
 
       code.write(
         '// $dartType -> $graphQlType\n\n'
-        '$dartType fromGraphQL${graphQlType}ToDart$dartType(String v) => $dartCtor(v);\n'
+        '$dartType fromGraphQL${graphQlType}ToDart$dartType(String v) => $dartCtor;\n'
         'String fromDart${dartType}ToGraphQL$graphQlType($dartType v) => v.toString();\n'
         'List<$dartType> fromGraphQLList${graphQlType}ToDartList$dartType(List<Object?> v) => v.map((e) => fromGraphQL${graphQlType}ToDart$dartType(e as String)).toList();\n'
         'List<String> fromDartList${dartType}ToGraphQLList$graphQlType(List<$dartType> v) => v.map((e) => fromDart${dartType}ToGraphQL$graphQlType(e)).toList();\n'
         'List<$dartType>? fromGraphQLListNullable${graphQlType}ToDartListNullable$dartType(List<Object?>? v) => v?.map((e) => fromGraphQL${graphQlType}ToDart$dartType(e as String)).toList();\n'
         'List<String>? fromDartListNullable${dartType}ToGraphQLListNullable$graphQlType(List<$dartType>? v) => v?.map((e) => fromDart${dartType}ToGraphQL$graphQlType(e)).toList();\n'
-        '$dartType? fromGraphQL${graphQlType}NullableToDart${dartType}Nullable(String? v) => v == null ? null : $dartCtor(v);\n'
+        '$dartType? fromGraphQL${graphQlType}NullableToDart${dartType}Nullable(String? v) => v == null ? null : $dartCtor;\n'
         'String? fromDart${dartType}NullableToGraphQL${graphQlType}Nullable($dartType? v) => v?.toString();\n'
         'List<$dartType?> fromGraphQLList${graphQlType}NullableToDartList${dartType}Nullable(List<Object?> v) => v.map((e) => fromGraphQL${graphQlType}NullableToDart${dartType}Nullable(e as String?)).toList();\n'
         'List<String?> fromDartList${dartType}NullableToGraphQLList${graphQlType}Nullable(List<$dartType?> v) => v.map((e) => fromDart${dartType}NullableToGraphQL${graphQlType}Nullable(e)).toList();\n'
@@ -103,9 +119,9 @@ class ArtemisCustomTypeBuilder implements Builder {
       );
 
       buffer.writeln(
-        DartFormatter(fixes: [StyleFix.singleCascadeStatements]).format(
-          code.toString(),
-        ),
+        DartFormatter(
+          languageVersion: DartFormatter.latestLanguageVersion,
+        ).format(code.toString()),
       );
     }
 

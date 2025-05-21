@@ -21,3 +21,17 @@ class GameTitle {
   const GameTitle(this.value);
   final String value;
 }
+
+@ArtemisCustomType<CustomParse>(
+  parse: CustomParse.parse,
+  convert: CustomParse.convert,
+)
+class CustomParse extends NewType<double> {
+  const CustomParse(super.value);
+
+  static CustomParse parse(String value) {
+    return CustomParse(double.parse(value));
+  }
+
+  static String convert(CustomParse value) => value.value.toString();
+}
