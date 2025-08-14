@@ -73,7 +73,7 @@ class ArtemisCustomTypeBuilder implements Builder {
       if (parse != null) {
         // final code =
         //     (await buildStep.resolver.astNodeFor(parse))?.childEntities.last;
-        dartCtor = '${parse.enclosingElement3.name}.${parse.name}(v)';
+        dartCtor = '${parse.enclosingElement?.name}.${parse.name}(v)';
       }
 
       if (dartCtor == null) {
@@ -81,8 +81,8 @@ class ArtemisCustomTypeBuilder implements Builder {
             (e.element as ClassElement).constructors;
 
         for (var ctor in ctors) {
-          if (ctor.parameters.length == 1 &&
-              ctor.parameters.first.type.isDartCoreString) {
+          if (ctor.formalParameters.length == 1 &&
+              ctor.formalParameters.first.type.isDartCoreString) {
             dartCtor = '${ctor.displayName}(v)';
           }
         }
