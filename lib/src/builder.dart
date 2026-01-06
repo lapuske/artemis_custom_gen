@@ -37,7 +37,7 @@ class ArtemisCustomTypeBuilder implements Builder {
         final reader = LibraryReader(library);
 
         Iterable<AnnotatedElement> annotations =
-            reader.annotatedWith(TypeChecker.fromRuntime(ArtemisCustomType));
+            reader.annotatedWith(TypeChecker.typeNamed(ArtemisCustomType));
         if (annotations.isNotEmpty) {
           imports.add(asset);
         }
